@@ -41,7 +41,7 @@ router.post('/login',(req,res)=>{
                 return res.status(401).json({message : "Incorrect Username or Password"});
             }
             else if ( results[0].status === 'false'){
-                return res.status(401).json({essage:"Wait for Admn Approval"});
+                return res.status(401).json({essage:"Wait for Admin Approval"});
             }
             else if (results[0].password == user.password){
                 const response = {email:results[0].email, role:results[0].role,name:results[0].name}
@@ -59,22 +59,71 @@ router.post('/login',(req,res)=>{
 
 })
 var transporter = nodemailer.createTransport({
-    host :
+    service :'gmail',
+    auth:{
+        user: process.env.EMAIL,
+        user: process.env.PASSWORD,
+    }
 })
  // API forgetPassword
-router.post('/forgetpassword',(req,res)=> {
+router.post('/forgetPassword',(req,res)=> {
     const user = req.body;
     query = "select email,password from user where email=?";
     connection.query(query, [user.email], (err, results) => {
         if(!err){
-            if(results.length <= 0){
-                return res.status(200).json({message:"Password sent successfully to your email"});
+            if(results.length <= 0)
+            {
+                return res.status(200).json({message:"PASSWORD sent successfully TO YOUR EMAIL"});
             }
             else{
-                var mail
+                var mailOption={
+                    from: process.env.EMAIL,
+                    to: results[0].email,
+                    subject:'Password By Cafe Managment System',
+                    html:'<p><b>Your Login detail For Cafe Management System</b><br><b>Email:</b>'+results[0].email+'<br><b>Password: </b>'+results[0].password+'<br><a href="http://localhost:4200/">Click Here To Login</a></p>'
+                };
+                transporter.sendMail(mailOption,function(error,info){
+                    if(error){
+                        console.log(error);
+                    }
+                    else{
+                        console.log('Email sent '+info.response);
+                    }
+                });
+                return res.status(200).json({message:"Password sent successfully to your email"});
             }
+        }
+        else{
+            return res.status(500).json(err);
         }
     })
 
 })
+router.get('/get',(req,res)=>{
+    var query ="select id,name,email,contactNumber,status from user where role='user'";
+    connection.query(query,(err,results)=>{
+        if(!err){
+            return res.status(200).json(results);
+        }
+        else{
+            return res.status(500).json(err);
+        }
+    })
+})
+router.put('/update',(req,res)=>{
+    let user = req.body;
+    var query = "updat user set status=? where id=?";
+    connection.query(query,[user.status,user.id],(err,rsults)=>{
+        if(!err){
+            if(results.affectedRows == 0){
+                return res.status(404).json({message:"User id does not exist"});
+            }
+            return res.status(200).json({message:"User Updated Successfully"});
+        }
+        else {
+            return res.status(500).json(err);
+        }
+    })
+})
+
 module.exports = router;
