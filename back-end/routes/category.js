@@ -42,6 +42,6 @@ router.put('/update',auth.authenticateToken,checkRole.checkRole,(req,res,next)=>
         else {
             return res.status(500).json(err);
         }
-    })
-})
+    }) 
+}) 
 module.exports = router ;
