@@ -13,4 +13,10 @@ url = environment.apiUrl;
       headers : new HttpHeaders().set('content-Type',"application/json")
     })
   }
+
+  forgetPassword(data:any){
+    return this.httpClient.post(this.url+"user/forgetPassword",data,{
+      headers: new HttpHeaders().set('content-Type',"application/json")
+    })
+  }
 }
