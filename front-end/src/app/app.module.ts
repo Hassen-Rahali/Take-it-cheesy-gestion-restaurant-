@@ -16,7 +16,8 @@ import { AppSidebarComponent } from './layouts/full/sidebar/sidebar.component';
 import {HttpClientModule} from "@angular/common/http";
 import { SignupComponent } from './signup/signup.component';
 import {NgxUiLoaderHttpModule, NgxUiLoaderConfig, SPINNER, PB_DIRECTION, NgxUiLoaderModule} from "ngx-ui-loader";
-import { ForgetPasswordComponent } from './forget-password/forget-password.component'
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { LoginComponent } from './login/login.component'
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig ={
   text:"Loading...",
@@ -39,7 +40,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig ={
     AppHeaderComponent,
     AppSidebarComponent,
     SignupComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    LoginComponent
    ],
   imports: [
     BrowserModule,

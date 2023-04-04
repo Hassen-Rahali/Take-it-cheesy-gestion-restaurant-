@@ -9,13 +9,19 @@ url = environment.apiUrl;
   constructor(private httpClient:HttpClient) { }
 
   signup(data:any){
-    return this.httpClient.post(this.url+"/user/signup",data,{
+    return this.httpClient.post(this.url+"/user/signup/",data,{
       headers : new HttpHeaders().set('content-Type',"application/json")
     })
   }
 
   forgetPassword(data:any){
-    return this.httpClient.post(this.url+"user/forgetPassword",data,{
+    return this.httpClient.post(this.url+"/user/forgetPassword/",data,{
+      headers: new HttpHeaders().set('content-Type',"application/json")
+    })
+  }
+
+  login(data:any){
+    return this.httpClient.post(this.url+"/user/login/",data,{
       headers: new HttpHeaders().set('content-Type',"application/json")
     })
   }
