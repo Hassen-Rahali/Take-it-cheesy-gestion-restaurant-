@@ -25,4 +25,8 @@ url = environment.apiUrl;
       headers: new HttpHeaders().set('content-Type',"application/json")
     })
   }
+checkToken(){
+    return this.httpClient.get(this.url+"/user/checkToken");
+}
+
 }
