@@ -8,7 +8,7 @@ const router = express.Router();
 var auth = require('../services/authentication');
 
 // Define a GET route for getting various counts
-router.get('/details', auth.authenticateToken, (req, res, next) => {
+router.get('/details', (req, res, next) => {
 // Declare variables to store the counts
     var categoryCount;
     var productCount;
