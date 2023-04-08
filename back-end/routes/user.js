@@ -128,7 +128,7 @@ router.put('/update',auth.authenticateToken,checkRole.checkRole,(req,res)=>{
     })
 })
 
-router.post('/changePassword',auth.authenticateToken,(req, res)=>{
+router.post('/changePassword',(req, res)=>{
     const user = req.body;
     const email = res.locals.email;
     var query = "select * from user where email=? and password=?";
