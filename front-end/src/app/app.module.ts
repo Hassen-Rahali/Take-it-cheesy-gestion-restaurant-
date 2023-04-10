@@ -20,6 +20,8 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { LoginComponent } from './login/login.component'
 import {TokenInterceptorInterceptor} from "./token-interceptor.interceptor";
 
+
+
 const ngxUiLoaderConfig: NgxUiLoaderConfig ={
   text:"Loading...",
   textColor:'#FFFFFF',
@@ -42,7 +44,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig ={
     AppSidebarComponent,
     SignupComponent,
     ForgetPasswordComponent,
-    LoginComponent
+    LoginComponent,
+
    ],
   imports: [
     BrowserModule,
