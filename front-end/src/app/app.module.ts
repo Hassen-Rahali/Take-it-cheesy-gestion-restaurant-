@@ -13,27 +13,32 @@ import { SharedModule } from './shared/shared.module';
 import { FullComponent } from './layouts/full/full.component';
 import { AppHeaderComponent } from './layouts/full/header/header.component';
 import { AppSidebarComponent } from './layouts/full/sidebar/sidebar.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
-import {NgxUiLoaderHttpModule, NgxUiLoaderConfig, SPINNER, PB_DIRECTION, NgxUiLoaderModule} from "ngx-ui-loader";
-import { ForgetPasswordComponent } from './forget-password/forget-password.component';
-import { LoginComponent } from './login/login.component'
-import {TokenInterceptorInterceptor} from "./token-interceptor.interceptor";
+import {
+  NgxUiLoaderConfig,
+  NgxUiLoaderModule,
+  PB_DIRECTION,
+  SPINNER,
+} from 'ngx-ui-loader';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { LoginComponent } from './login/login.component';
+import { TokenInterceptorInterceptor } from './services/token-interceptor.interceptor';
+import { AccordionLinkDirective } from './shared/accordion';
 
+const ngx_ui_loader_config: NgxUiLoaderConfig = {
+  text: 'Loading...',
+  textColor: '#FFFFFF',
+  textPosition: 'center-center',
+  pbColor: 'red',
+  bgsColor: 'red',
+  fgsColor: 'red',
+  fgsType: SPINNER.chasingDots,
+  fgsSize: 100,
+  pbDirection: PB_DIRECTION.leftToRight,
+  pbThickness: 5,
+};
 
-
-const ngxUiLoaderConfig: NgxUiLoaderConfig ={
-  text:"Loading...",
-  textColor:'#FFFFFF',
-  textPosition:"center-center",
-  pbColor:"red",
-  bgsColor:"red",
-  fgsColor:"red",
-  fgsType:SPINNER.ballSpinClockwise,
-  fgsSize:100,
-  pbDirection:PB_DIRECTION.leftToRight,
-  pbThickness:5
-}
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,10 +48,9 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig ={
     AppHeaderComponent,
     AppSidebarComponent,
     SignupComponent,
-    ForgetPasswordComponent,
+    ForgotPasswordComponent,
     LoginComponent,
-
-   ],
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -57,9 +61,17 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig ={
     FlexLayoutModule,
     SharedModule,
     HttpClientModule,
-    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxUiLoaderModule.forRoot(ngx_ui_loader_config),
   ],
-  providers: [HttpClientModule,{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorInterceptor,multi:true}],
-  bootstrap: [AppComponent]
+  providers: [
+    HttpClientModule,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorInterceptor,
+      multi: true,
+    },
+    AccordionLinkDirective
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
