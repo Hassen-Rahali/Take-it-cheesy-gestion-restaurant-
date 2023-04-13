@@ -9,13 +9,8 @@ export interface Menu {
 
 const MENUITEMS = [
   { state: 'dashboard', name: 'Dashboard', icon: 'dashboard', role: '' },
-  {
-    state: 'category',
-    name: 'Manage Categories',
-    icon: 'category',
-    role: 'admin',
-  },
-  { state: 'product', name: 'Manage Products', icon: 'grass', role: 'admin' },
+  {state: 'category', name: 'Manage Categories', icon: 'category', role: 'admin'},
+  { state: 'product', name: 'Manage Products', icon: 'inventory_2', role: 'admin' },
   { state: 'order', name: 'Manage Orders', icon: 'list_alt', role: '' },
   { state: 'bill', name: 'View Bills', icon: 'money', role: '' },
   { state: 'user', name: 'Manage Users', icon: 'people', role: 'admin' },
