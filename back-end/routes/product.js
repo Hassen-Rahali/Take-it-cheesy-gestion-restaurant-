@@ -62,31 +62,19 @@ router.get("/getByID/:id", (req, res, next) => {
 
 router.patch("/update", auth.authenticate, role.checkRole, (req, res, next) => {
   let product = req.body;
-  let query =
-    "update product set name=?, categoryID=?, description=?, price=?, where id=?";
-  connection.query(
-    query,
-    [
-      product.name,
-      product.categoryID,
-      product.description,
-      product.price,
-      product.id,
-    ],
-    (err, results) => {
-      if (!err) {
-        if (results.affectedRows == 0) {
-          return res.status(404).json({ message: "Product ID not found" });
-        }
-        return res
-          .status(200)
-          .json({ message: "product updated successfully" });
-      } else {
-        return res.status(500).json({ err });
+  var query ="update product set name=?, categoryID=?, description=?, price=? where id=?"
+  connection.query(query,[product.name,product.categoryID,product.description,product.price,product.id],(err,results)=>{
+    if (!err){
+      if(results.affectedRows == 0){
+        return res.status(404).json({message:"Product ID does no found"});
       }
+      return res.status(200).json({message:"Product Updated Successfully"});
     }
-  );
-});
+    else {
+      return res.status(500).json(err);
+    }
+  })
+})
 
 router.delete("/delete/:id", auth.authenticate, role.checkRole, (req, res, next) => {
     const id = req.params.id;
