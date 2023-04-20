@@ -137,7 +137,7 @@ router.post("/forgotPassword", (req, res) => {
         let mailOptions = {
           from: process.env.EMAIL,
           to: results[0].email,
-          subject: "Password retrieval by Cafe Management system",
+          subject: "Password retrieval by Take it cheesy !",
           html:
               "<p>Your login details for the Cafe Management System <br> Email: " +
               results[0].email +
